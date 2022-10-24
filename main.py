@@ -131,20 +131,7 @@ def send_message(to_user, access_token, region_name, weather, temp, wind_dir, no
     # 获取在一起的日期差
     love_days = str(today.__sub__(love_date)).split(" ")[0]
 
-def send_message(to_user, access_token, region_name, weather, temp, wind_dir, note_ch, note_en):
-    url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={}".format(access_token)
-    week_list = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
-    year = localtime().tm_year
-    month = localtime().tm_mon
-    day = localtime().tm_mday
-    today = datetime.date(datetime(year=year, month=month, day=day))
-    week = week_list[today.isoweekday() % 7]
-    meet_year = int(config["meet_date"].split("-")[0])
-    meet_month = int(config["meet_date"].split("-")[1])
-    meet_day = int(config["meet_date"].split("-")[2])
-    meet_date = date(meet_year, meet_month, meet_day)
-    # 获取在一起的日期差
-    meet_days = str(today.__sub__(meet_date)).split(" ")[0]
+
     # 获取所有生日数据
     birthdays = {}
     for k, v in config.items():
@@ -180,9 +167,6 @@ def send_message(to_user, access_token, region_name, weather, temp, wind_dir, no
                 "value": love_days,
                 "color": get_color()
             },
-          "meet_day": {
-                "value": meet_days,
-                "color": get_color()
             },
             "note_en": {
                 "value": note_en,
